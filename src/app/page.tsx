@@ -7,18 +7,13 @@ import { Suspense } from 'react';
 
 export default async function Home() {
   return (
-    <Container>
-      <Header />
-
-      <FeaturedPost />
-
+    <>
+      <Suspense fallback={<SpinLoader />}>
+        <FeaturedPost />
+      </Suspense>
       <Suspense fallback={<SpinLoader />}>
         <PostsList />
       </Suspense>
-
-      <footer>
-        <p>Footer</p>
-      </footer>
-    </Container>
+    </>
   );
 }

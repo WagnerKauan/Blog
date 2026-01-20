@@ -1,8 +1,14 @@
+import { findAllPublicPosts } from '@/lib/post/queries';
 import { PostCoverImage } from '../PostCoverImage';
 import { PostHeading } from '../PostHeading';
+import { PostSummary } from '../PostSummary';
 
-export function FeaturedPost() {
-  const slug = 'qualquer';
+export async function FeaturedPost() {
+  const posts = await findAllPublicPosts();
+
+  const post = posts[0];
+
+  const slug = post.slug;
   const postLink = `/post/${slug}`;
 
   return (
@@ -12,29 +18,15 @@ export function FeaturedPost() {
           href: postLink,
         }}
         imageProps={{
-          src: '/images/bryen_9.png',
-          alt: 'Imagem do post',
+          src: post.coverImageUrl,
+          alt: post.title,
           width: 1200,
           height: 720,
           priority: true,
         }}
       />
 
-      <div className="flex flex-col gap-4 sm:justify-center">
-        <time
-          className="text-sm text-slate-600 font-bold"
-          dateTime="2025-04-20"
-        >
-          20/04/2025 10:00
-        </time>
-        <PostHeading as="h1" url="#">
-          Como manter o foco no mundo digital
-        </PostHeading>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Debitis
-        voluptatem soluta iure. Aspernatur, necessitatibus commodi. Culpa,
-        perspiciatis recusandae. Iste a odio sapiente! Illum suscipit maxime
-        modi veritatis libero magnam blanditiis!
-      </div>
+      <PostSummary postHeading="h1" postLink={postLink} {...post} />
     </section>
   );
 }
