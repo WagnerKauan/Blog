@@ -1,10 +1,10 @@
-import { findAllPublicPosts } from '@/lib/post/queries';
+import { findAllPublicPostsChached } from '@/lib/post/queries';
 import { PostCoverImage } from '../PostCoverImage';
 import { PostHeading } from '../PostHeading';
 import { PostSummary } from '../PostSummary';
 
 export async function FeaturedPost() {
-  const posts = await findAllPublicPosts();
+  const posts = await findAllPublicPostsChached();
 
   const post = posts[0];
 
