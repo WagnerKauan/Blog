@@ -28,6 +28,10 @@ export class JsonPostRepository implements PostRepository {
     return posts;
   }
 
+  findAll(): Promise<PostModel[]> {
+    return this.readFromDisk();
+  }
+
   async findAllPublic(): Promise<PostModel[]> {
     const posts = await this.readFromDisk();
     return posts.filter(post => post.published);
@@ -36,15 +40,15 @@ export class JsonPostRepository implements PostRepository {
   async findById(id: string): Promise<PostModel> {
     const posts = await this.findAllPublic();
     const post = posts.find(post => post.id === id);
-    if (!post) throw new Error('Post não encontrado.');
+    if (!post) throw new Error('Post não encontrado para o id informado.');
     return post;
   }
 
-  async findBySlug(slug: string): Promise<PostModel> {
+  async findBySlugPublic(slug: string): Promise<PostModel> {
     await this.simulateNetworkDelay();
     const posts = await this.findAllPublic();
     const post = posts.find(post => post.slug === slug);
-    if (!post) throw new Error('Post não encontrado.');
+    if (!post) throw new Error('Post não encontrado para o slug informado.');
     return post;
   }
 }

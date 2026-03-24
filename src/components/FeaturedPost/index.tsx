@@ -1,4 +1,4 @@
-import { findAllPublicPostsChached } from '@/lib/post/queries';
+import { findAllPublicPostsChached } from '@/lib/post/queries/public';
 import { PostCoverImage } from '../PostCoverImage';
 import { PostHeading } from '../PostHeading';
 import { PostSummary } from '../PostSummary';
