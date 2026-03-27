@@ -1,10 +1,12 @@
 import { findAllPublicPostsChached } from '@/lib/post/queries/public';
 import { PostCoverImage } from '../PostCoverImage';
-import { PostHeading } from '../PostHeading';
 import { PostSummary } from '../PostSummary';
+import ErrorMessage from '../ErrorMessage';
 
 export async function FeaturedPost() {
   const posts = await findAllPublicPostsChached();
+
+  if(posts.length <= 0) return <ErrorMessage pageTitle="Ops..." content="Ainda não temos postagens." />
 
   const post = posts[0];
 

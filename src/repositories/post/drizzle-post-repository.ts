@@ -35,7 +35,7 @@ export class DrizzlePostRepository implements PostRepository {
   }
 
   async findAll(): Promise<PostModel[]> {
-    await asyncDelay(10000)
+    await asyncDelay(0)
     const posts = await drizzleDB.query.posts.findMany({
       orderBy: (posts, { desc }) => desc(posts.createdAt),
     });
